@@ -20,7 +20,7 @@ export default function Tile({ letter, player }: TileProps) {
     <div
       className={cn(
         'relative flex items-center justify-center w-full h-full rounded-md border backdrop-blur-sm',
-        'font-headline transition-all duration-300 ease-elegant transform-gpu',
+        'font-headline transition-all duration-300 ease-elegant transform-gpu animate-pop-in',
         playerClass
       )}
     >
