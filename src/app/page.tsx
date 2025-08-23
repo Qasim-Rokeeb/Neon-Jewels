@@ -4,10 +4,11 @@ import React, { useState } from 'react';
 import GameBoard from '@/components/game-board';
 import PlayerInfo from '@/components/player-info';
 import EndGameModal from '@/components/end-game-modal';
+import HowToPlayModal from '@/components/how-to-play-modal';
 import { Button } from '@/components/ui/button';
 import { GameData } from '@/lib/types';
 import { NeonJewelsLogo } from '@/components/icons';
-import { Award, Dices, Share2 } from 'lucide-react';
+import { Award, HelpCircle, Share2 } from 'lucide-react';
 
 const MOCK_GAME_DATA: GameData = {
   boardSize: 15,
@@ -25,7 +26,8 @@ const MOCK_GAME_DATA: GameData = {
 };
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEndGameModalOpen, setIsEndGameModalOpen] = useState(false);
+  const [isHowToPlayModalOpen, setIsHowToPlayModalOpen] = useState(false);
 
   return (
     <>
@@ -40,8 +42,8 @@ export default function Home() {
             <Button variant="ghost" size="icon">
               <Share2 className="w-5 h-5" />
             </Button>
-            <Button variant="ghost" size="icon">
-              <Dices className="w-5 h-5" />
+            <Button variant="ghost" size="icon" onClick={() => setIsHowToPlayModalOpen(true)}>
+              <HelpCircle className="w-5 h-5" />
             </Button>
           </div>
         </header>
@@ -58,7 +60,7 @@ export default function Home() {
         
         <div className="mt-auto">
             <Button
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => setIsEndGameModalOpen(true)}
               size="lg"
               className="font-headline text-lg tracking-wider bg-primary/80 backdrop-blur-sm border border-primary hover:bg-primary transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] shadow-[0_0_20px_hsl(var(--primary)/0.5)] hover:shadow-[0_0_30px_hsl(var(--primary)/0.7)]"
             >
@@ -68,9 +70,13 @@ export default function Home() {
         </div>
 
         <EndGameModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
+          isOpen={isEndGameModalOpen}
+          onClose={() => setIsEndGameModalOpen(false)}
           gameData={MOCK_GAME_DATA}
+        />
+        <HowToPlayModal
+          isOpen={isHowToPlayModalOpen}
+          onClose={() => setIsHowToPlayModalOpen(false)}
         />
       </div>
     </>
