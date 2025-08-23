@@ -60,10 +60,10 @@ export default function Home() {
       <div className="relative flex flex-col min-h-screen font-body text-foreground">
         <header className="w-full p-4 flex justify-between items-center bg-transparent animate-fade-in-down container mx-auto">
           <Link href="/" className="flex items-center gap-3">
-            <WordGlowLogo className="w-10 h-10" />
-            <h1 className="text-2xl font-headline tracking-widest uppercase">WordGlow</h1>
+            <WordGlowLogo className="w-8 h-8 sm:w-10 sm:h-10" />
+            <h1 className="text-xl sm:text-2xl font-headline tracking-widest uppercase">WordGlow</h1>
           </Link>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2">
             <Button variant="ghost" size="icon">
               <Share2 className="w-5 h-5" />
             </Button>
@@ -73,14 +73,14 @@ export default function Home() {
           </div>
         </header>
 
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-[320px_1fr] xl:grid-cols-[380px_1fr] gap-4 container mx-auto p-4">
-          <aside className="animate-fade-in-left animation-delay-300 flex flex-col gap-8">
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[320px_1fr] xl:grid-cols-[380px_1fr] gap-4 container mx-auto p-4">
+          <aside className="animate-fade-in-left animation-delay-300 flex flex-col gap-4 md:gap-8">
             <div className="space-y-4">
               <PlayerInfo playerName="NeonGamer" score={currentScores["NeonGamer"]} isCurrentPlayer={false} />
               <PlayerInfo playerName="AI Opponent" score={currentScores["AI Opponent"]} isCurrentPlayer={false} isWinner={isGameFinished && MOCK_GAME_DATA.finalScores["AI Opponent"] > MOCK_GAME_DATA.finalScores["NeonGamer"]} />
             </div>
             <div className="flex-grow flex flex-col justify-end">
-                <div className="w-full flex justify-center py-8 animate-fade-in-up animation-delay-400">
+                <div className="w-full flex justify-center py-4 md:py-8 animate-fade-in-up animation-delay-400">
                   <Button
                     onClick={() => setIsEndGameModalOpen(true)}
                     disabled={!isGameFinished}
@@ -95,7 +95,7 @@ export default function Home() {
           </aside>
           
           <main className="flex flex-col items-center justify-center gap-4 animate-fade-in animation-delay-200">
-            <div className="w-full max-w-[80vh] aspect-square">
+            <div className="w-full max-w-full aspect-square sm:max-w-[calc(100vh-200px)]">
               <GameBoard placements={visiblePlacements} boardSize={MOCK_GAME_DATA.boardSize} />
             </div>
             <div className="flex items-center gap-4 mt-2">
@@ -112,7 +112,7 @@ export default function Home() {
         
         <footer className="w-full text-center text-muted-foreground text-sm animate-fade-in-up animation-delay-500 container mx-auto">
             <Separator className="my-4 bg-border/20" />
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-4">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-4 px-4">
               <p>&copy; {new Date().getFullYear()} WordGlow. All Rights Reserved.</p>
               <div className="flex items-center gap-4">
                 <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
