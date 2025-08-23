@@ -21,13 +21,12 @@ export default function Tile({ letter, player }: TileProps) {
       className={cn(
         'relative flex items-center justify-center w-full h-full rounded-md border backdrop-blur-sm',
         'font-headline transition-all duration-300 ease-elegant transform-gpu',
-        'shadow-[0_0_10px_0px_var(--tw-shadow-color)] animate-pulse-slow',
         playerClass
       )}
     >
       <span
         className="text-lg md:text-xl lg:text-2xl font-bold"
-        style={{ textShadow: '0 0 8px hsl(var(--foreground)), 0 0 12px hsl(var(--foreground))' }}
+        style={{ textShadow: '0 0 5px hsl(var(--foreground)), 0 0 10px currentColor' }}
       >
         {letter.toUpperCase()}
       </span>
@@ -37,6 +36,3 @@ export default function Tile({ letter, player }: TileProps) {
     </div>
   );
 }
-
-// Add to tailwind.config.ts if needed
-// animation: { 'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite', }

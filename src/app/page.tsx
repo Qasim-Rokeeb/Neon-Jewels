@@ -32,8 +32,8 @@ export default function Home() {
   return (
     <>
       <div className="fixed inset-0 -z-10 nebula-bg" />
-      <div className="relative flex flex-col min-h-screen items-center justify-center p-4 sm:p-6 md:p-8 font-body text-foreground overflow-hidden">
-        <header className="absolute top-0 left-0 right-0 p-4 flex justify-between items-center bg-transparent">
+      <div className="relative flex flex-col min-h-screen items-center justify-between p-4 sm:p-6 md:p-8 font-body text-foreground overflow-hidden">
+        <header className="w-full max-w-7xl p-4 flex justify-between items-center bg-transparent">
           <div className="flex items-center gap-3">
             <NeonJewelsLogo className="w-10 h-10" />
             <h1 className="text-2xl font-headline tracking-widest uppercase">Neon Jewels</h1>
@@ -48,26 +48,27 @@ export default function Home() {
           </div>
         </header>
 
-        <main className="flex flex-col lg:flex-row items-center justify-center gap-8 w-full max-w-7xl mt-20 mb-8">
-          <PlayerInfo playerName="NeonGamer" score={MOCK_GAME_DATA.finalScores["NeonGamer"]} isCurrentPlayer={false} />
+        <main className="flex flex-col xl:flex-row items-center justify-center gap-8 w-full max-w-7xl my-8">
+          <div className="w-full xl:w-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-8 order-2 xl:order-1">
+            <PlayerInfo playerName="NeonGamer" score={MOCK_GAME_DATA.finalScores["NeonGamer"]} isCurrentPlayer={false} />
+            <PlayerInfo playerName="AI Opponent" score={MOCK_GAME_DATA.finalScores["AI Opponent"]} isCurrentPlayer={false} isWinner={true} />
+          </div>
           
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 order-1 xl:order-2">
             <GameBoard placements={MOCK_GAME_DATA.placements} boardSize={MOCK_GAME_DATA.boardSize} />
           </div>
-
-          <PlayerInfo playerName="AI Opponent" score={MOCK_GAME_DATA.finalScores["AI Opponent"]} isCurrentPlayer={false} isWinner={true} />
         </main>
         
-        <div className="mt-auto">
+        <footer className="w-full flex justify-center pb-4">
             <Button
               onClick={() => setIsEndGameModalOpen(true)}
               size="lg"
-              className="font-headline text-lg tracking-wider bg-primary/80 backdrop-blur-sm border border-primary hover:bg-primary transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] shadow-[0_0_20px_hsl(var(--primary)/0.5)] hover:shadow-[0_0_30px_hsl(var(--primary)/0.7)]"
+              className="font-headline text-lg tracking-wider bg-primary/80 backdrop-blur-sm border border-primary hover:bg-primary transition-all duration-300 ease-in-out shadow-[0_0_20px_hsl(var(--primary)/0.5)] hover:shadow-[0_0_40px_hsl(var(--primary)/0.8)] hover:scale-105"
             >
               <Award className="mr-2 h-5 w-5" />
               Show Play of the Game
             </Button>
-        </div>
+        </footer>
 
         <EndGameModal
           isOpen={isEndGameModalOpen}
