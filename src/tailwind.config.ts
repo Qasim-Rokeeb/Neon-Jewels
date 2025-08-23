@@ -1,3 +1,4 @@
+
 import type {Config} from 'tailwindcss';
 
 export default {
@@ -87,16 +88,65 @@ export default {
             height: '0',
           },
         },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'fade-in-down': {
+          '0%': { opacity: '0', transform: 'translateY(-20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'fade-in-up': {
+            '0%': { opacity: '0', transform: 'translateY(20px)' },
+            '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'fade-in-left': {
+            '0%': { opacity: '0', transform: 'translateX(-20px)' },
+            '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'fade-in': 'fade-in 0.5s ease-out forwards',
+        'fade-in-down': 'fade-in-down 0.5s ease-out forwards',
+        'fade-in-up': 'fade-in-up 0.5s ease-out forwards',
+        'fade-in-left': 'fade-in-left 0.5s ease-out forwards',
       },
       transitionTimingFunction: {
         'elegant': 'cubic-bezier(0.22, 1, 0.36, 1)',
+      },
+      animationDelay: {
+        '100': '100ms',
+        '200': '200ms',
+        '300': '300ms',
+        '400': '400ms',
+        '500': '500ms',
       }
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [
+      require('tailwindcss-animate'),
+      function({ addUtilities, theme }: { addUtilities: any, theme: any }) {
+        const newUtilities = {
+          '.animation-delay-100': {
+            'animation-delay': theme('animationDelay.100'),
+          },
+          '.animation-delay-200': {
+            'animation-delay': theme('animationDelay.200'),
+          },
+          '.animation-delay-300': {
+            'animation-delay': theme('animationDelay.300'),
+          },
+          '.animation-delay-400': {
+            'animation-delay': theme('animationDelay.400'),
+          },
+          '.animation-delay-500': {
+            'animation-delay': theme('animationDelay.500'),
+          },
+        }
+        addUtilities(newUtilities, ['responsive', 'hover'])
+      }
+  ],
 } satisfies Config;
