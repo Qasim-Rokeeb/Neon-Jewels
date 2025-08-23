@@ -63,7 +63,7 @@ export default function Home() {
             <Button
               onClick={() => setIsEndGameModalOpen(true)}
               size="lg"
-              className="font-headline text-lg tracking-wider bg-primary/80 backdrop-blur-sm border border-primary hover:bg-primary transition-all duration-300 ease-in-out shadow-[0_0_20px_hsl(var(--primary)/0.5)] hover:shadow-[0_0_40px_hsl(var(--primary)/0.8)] hover:scale-105"
+              className="font-headline text-lg tracking-wider bg-primary/80 backdrop-blur-sm border border-primary hover:bg-primary transition-all duration-300 ease-in-out shadow-[0_0_20px_hsl(var(--primary)/0.5),inset_0_0_10px_hsl(var(--primary)/0.3)] hover:shadow-[0_0_40px_hsl(var(--primary)/0.8)] hover:scale-105 animate-pulse-slow"
             >
               <Award className="mr-2 h-5 w-5" />
               Show Play of the Game
