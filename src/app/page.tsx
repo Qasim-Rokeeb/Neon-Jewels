@@ -57,8 +57,8 @@ export default function Home() {
   return (
     <>
       <div className="fixed inset-0 -z-10 nebula-bg" />
-      <div className="relative flex flex-col min-h-screen items-center justify-between p-4 sm:p-6 md:p-8 font-body text-foreground overflow-hidden">
-        <header className="w-full max-w-7xl p-4 flex justify-between items-center bg-transparent animate-fade-in-down">
+      <div className="relative flex flex-col min-h-screen font-body text-foreground">
+        <header className="w-full p-4 flex justify-between items-center bg-transparent animate-fade-in-down container mx-auto">
           <Link href="/" className="flex items-center gap-3">
             <WordGlowLogo className="w-10 h-10" />
             <h1 className="text-2xl font-headline tracking-widest uppercase">WordGlow</h1>
@@ -73,14 +73,31 @@ export default function Home() {
           </div>
         </header>
 
-        <main className="flex flex-1 flex-col xl:flex-row items-center justify-center gap-8 w-full max-w-7xl my-8">
-          <div className="w-full xl:w-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-8 order-2 xl:order-1 animate-fade-in-left animation-delay-300">
-            <PlayerInfo playerName="NeonGamer" score={currentScores["NeonGamer"]} isCurrentPlayer={false} />
-            <PlayerInfo playerName="AI Opponent" score={currentScores["AI Opponent"]} isCurrentPlayer={false} isWinner={isGameFinished && MOCK_GAME_DATA.finalScores["AI Opponent"] > MOCK_GAME_DATA.finalScores["NeonGamer"]} />
-          </div>
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-[320px_1fr] xl:grid-cols-[380px_1fr] gap-4 container mx-auto p-4">
+          <aside className="animate-fade-in-left animation-delay-300 flex flex-col gap-8">
+            <div className="space-y-4">
+              <PlayerInfo playerName="NeonGamer" score={currentScores["NeonGamer"]} isCurrentPlayer={false} />
+              <PlayerInfo playerName="AI Opponent" score={currentScores["AI Opponent"]} isCurrentPlayer={false} isWinner={isGameFinished && MOCK_GAME_DATA.finalScores["AI Opponent"] > MOCK_GAME_DATA.finalScores["NeonGamer"]} />
+            </div>
+            <div className="flex-grow flex flex-col justify-end">
+                <div className="w-full flex justify-center py-8 animate-fade-in-up animation-delay-400">
+                  <Button
+                    onClick={() => setIsEndGameModalOpen(true)}
+                    disabled={!isGameFinished}
+                    size="lg"
+                    className="w-full font-headline text-lg tracking-wider bg-primary/80 backdrop-blur-sm border border-primary hover:bg-primary transition-all duration-300 ease-in-out shadow-[0_0_20px_hsl(var(--primary)/0.5),inset_0_0_10px_hsl(var(--primary)/0.3)] hover:shadow-[0_0_40px_hsl(var(--primary)/0.8)] hover:scale-105 data-[disabled]:animate-none data-[disabled]:shadow-none data-[disabled]:scale-100 data-[disabled]:bg-muted/50 data-[disabled]:text-muted-foreground animate-pulse-slow"
+                  >
+                    <Award className="mr-2 h-5 w-5" />
+                    Show Play of the Game
+                  </Button>
+              </div>
+            </div>
+          </aside>
           
-          <div className="flex flex-col items-center gap-4 order-1 xl:order-2 animate-fade-in animation-delay-200">
-            <GameBoard placements={visiblePlacements} boardSize={MOCK_GAME_DATA.boardSize} />
+          <main className="flex flex-col items-center justify-center gap-4 animate-fade-in animation-delay-200">
+            <div className="w-full max-w-[80vh] aspect-square">
+              <GameBoard placements={visiblePlacements} boardSize={MOCK_GAME_DATA.boardSize} />
+            </div>
             <div className="flex items-center gap-4 mt-2">
               <Button onClick={handlePrev} disabled={currentMove === 0} variant="outline" size="icon">
                 <ChevronLeft />
@@ -90,22 +107,10 @@ export default function Home() {
                 <ChevronRight />
               </Button>
             </div>
-          </div>
-        </main>
-        
-        <div className="w-full flex justify-center py-8 animate-fade-in-up animation-delay-400">
-            <Button
-              onClick={() => setIsEndGameModalOpen(true)}
-              disabled={!isGameFinished}
-              size="lg"
-              className="font-headline text-lg tracking-wider bg-primary/80 backdrop-blur-sm border border-primary hover:bg-primary transition-all duration-300 ease-in-out shadow-[0_0_20px_hsl(var(--primary)/0.5),inset_0_0_10px_hsl(var(--primary)/0.3)] hover:shadow-[0_0_40px_hsl(var(--primary)/0.8)] hover:scale-105 data-[disabled]:animate-none data-[disabled]:shadow-none data-[disabled]:scale-100 data-[disabled]:bg-muted/50 data-[disabled]:text-muted-foreground animate-pulse-slow"
-            >
-              <Award className="mr-2 h-5 w-5" />
-              Show Play of the Game
-            </Button>
+          </main>
         </div>
-
-        <footer className="w-full max-w-7xl text-center text-muted-foreground text-sm animate-fade-in-up animation-delay-500">
+        
+        <footer className="w-full text-center text-muted-foreground text-sm animate-fade-in-up animation-delay-500 container mx-auto">
             <Separator className="my-4 bg-border/20" />
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-4">
               <p>&copy; {new Date().getFullYear()} WordGlow. All Rights Reserved.</p>

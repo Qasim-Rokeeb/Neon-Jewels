@@ -16,7 +16,7 @@ export default function PlayerInfo({ playerName, score, isCurrentPlayer, isWinne
   return (
     <div
       className={cn(
-        'relative flex-shrink-0 w-full lg:max-w-xs p-4 rounded-xl border bg-card/50 backdrop-blur-md transition-all duration-500 ease-elegant overflow-hidden',
+        'relative flex-shrink-0 w-full p-4 rounded-xl border bg-card/50 backdrop-blur-md transition-all duration-500 ease-elegant overflow-hidden',
         'border-border/20 shadow-xl',
         isCurrentPlayer ? 'border-primary shadow-primary/20' : '',
         isWinner ? 'border-amber-400 shadow-amber-400/20' : ''
