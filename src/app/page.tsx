@@ -1,17 +1,19 @@
 
 "use client";
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import GameBoard from '@/components/game-board';
 import PlayerInfo from '@/components/player-info';
 import EndGameModal from '@/components/end-game-modal';
 import HowToPlayModal from '@/components/how-to-play-modal';
 import { Button } from '@/components/ui/button';
-import { GameData, WordPlacement } from '@/lib/types';
+import { GameData } from '@/lib/types';
 import { WordGlowLogo } from '@/components/icons';
 import { Award, HelpCircle, Share2, ChevronLeft, ChevronRight, Github } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
+import { getPlayOfTheGame } from './actions';
+import type { PlayOfTheGameRecommenderOutput } from '@/ai/flows/play-of-the-game-recommender';
 
 const MOCK_GAME_DATA: GameData = {
   boardSize: 15,
@@ -32,6 +34,8 @@ export default function Home() {
   const [isEndGameModalOpen, setIsEndGameModalOpen] = useState(false);
   const [isHowToPlayModalOpen, setIsHowToPlayModalOpen] = useState(false);
   const [currentMove, setCurrentMove] = useState(0);
+  const [loadingPlayOfTheGame, setLoadingPlayOfTheGame] = useState(false);
+  const [playOfTheGameResult, setPlayOfTheGameResult] = useState<PlayOfTheGameRecommenderOutput & {error?: string} | null>(null);
 
   const visiblePlacements = useMemo(() => MOCK_GAME_DATA.placements.slice(0, currentMove), [currentMove]);
 
@@ -53,6 +57,16 @@ export default function Home() {
   };
   
   const isGameFinished = currentMove === MOCK_GAME_DATA.placements.length;
+
+  const handleShowPlayOfTheGame = useCallback(async () => {
+    setIsEndGameModalOpen(true);
+    setLoadingPlayOfTheGame(true);
+    setPlayOfTheGameResult(null);
+    const gameDataString = JSON.stringify(MOCK_GAME_DATA);
+    const res = await getPlayOfTheGame(gameDataString);
+    setPlayOfTheGameResult(res);
+    setLoadingPlayOfTheGame(false);
+  }, []);
 
   return (
     <>
@@ -82,7 +96,7 @@ export default function Home() {
             <div className="flex-grow flex flex-col justify-end">
                 <div className="w-full flex justify-center py-4 md:py-8 animate-fade-in-up animation-delay-400">
                   <Button
-                    onClick={() => setIsEndGameModalOpen(true)}
+                    onClick={handleShowPlayOfTheGame}
                     disabled={!isGameFinished}
                     size="lg"
                     className="w-full font-headline text-lg tracking-wider bg-primary/80 backdrop-blur-sm border border-primary hover:bg-primary transition-all duration-300 ease-in-out shadow-[0_0_20px_hsl(var(--primary)/0.5),inset_0_0_10px_hsl(var(--primary)/0.3)] hover:shadow-[0_0_40px_hsl(var(--primary)/0.8)] hover:scale-105 data-[disabled]:animate-none data-[disabled]:shadow-none data-[disabled]:scale-100 data-[disabled]:bg-muted/50 data-[disabled]:text-muted-foreground animate-pulse-slow"
@@ -130,6 +144,8 @@ export default function Home() {
           isOpen={isEndGameModalOpen}
           onClose={() => setIsEndGameModalOpen(false)}
           gameData={MOCK_GAME_DATA}
+          loading={loadingPlayOfTheGame}
+          result={playOfTheGameResult}
         />}
         <HowToPlayModal
           isOpen={isHowToPlayModalOpen}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   Dialog,
   DialogContent,
@@ -9,9 +9,7 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog';
 import { Button } from './ui/button';
-import { getPlayOfTheGame } from '@/app/actions';
 import { GameData } from '@/lib/types';
-import { Skeleton } from './ui/skeleton';
 import { Award, Bot, Quote, Share2, Sparkles } from 'lucide-react';
 import { PlayOfTheGameRecommenderOutput } from '@/ai/flows/play-of-the-game-recommender';
 
@@ -19,25 +17,11 @@ interface EndGameModalProps {
   isOpen: boolean;
   onClose: () => void;
   gameData: GameData;
+  loading: boolean;
+  result: (PlayOfTheGameRecommenderOutput & { error?: string | undefined; }) | null
 }
 
-export default function EndGameModal({ isOpen, onClose, gameData }: EndGameModalProps) {
-  const [result, setResult] = useState<PlayOfTheGameRecommenderOutput & {error?: string} | null>(null);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (isOpen) {
-      const fetchPlay = async () => {
-        setLoading(true);
-        setResult(null);
-        const gameDataString = JSON.stringify(gameData);
-        const res = await getPlayOfTheGame(gameDataString);
-        setResult(res);
-        setLoading(false);
-      };
-      fetchPlay();
-    }
-  }, [isOpen, gameData]);
+export default function EndGameModal({ isOpen, onClose, loading, result }: EndGameModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -67,12 +51,7 @@ export default function EndGameModal({ isOpen, onClose, gameData }: EndGameModal
 }
 
 const LoadingState = () => (
-    <div className="w-full space-y-4 flex flex-col items-center">
-        <Skeleton className="h-16 w-3/4 bg-muted/80" />
-        <div className="space-y-2 w-full">
-            <Skeleton className="h-4 w-full bg-muted/80" />
-            <Skeleton className="h-4 w-5/6 bg-muted/80" />
-        </div>
+    <div className="w-full space-y-4 flex flex-col items-center animate-fade-in">
         <div className="flex items-center justify-center pt-4">
             <Bot className="w-8 h-8 animate-spin text-primary" />
             <p className="ml-3 text-lg text-muted-foreground tracking-widest">AI is thinking...</p>
@@ -86,7 +65,7 @@ const ResultState = ({ result }: { result: PlayOfTheGameRecommenderOutput & {err
     }
 
     return (
-        <div className="text-center w-full flex flex-col items-center gap-6 p-4 rounded-lg">
+        <div className="text-center w-full flex flex-col items-center gap-6 p-4 rounded-lg animate-fade-in">
            <div className="relative">
              <h3 className="font-headline text-6xl tracking-wider text-accent" style={{textShadow: '0 0 20px hsl(var(--accent)), 0 0 40px hsl(var(--accent)/0.7)'}}>
                 {result.recommendedWord}
