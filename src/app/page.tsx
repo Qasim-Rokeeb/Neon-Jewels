@@ -11,6 +11,7 @@ import { GameData, WordPlacement } from '@/lib/types';
 import { NeonJewelsLogo } from '@/components/icons';
 import { Award, HelpCircle, Share2, ChevronLeft, ChevronRight, Github } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
+import Link from 'next/link';
 
 const MOCK_GAME_DATA: GameData = {
   boardSize: 15,
@@ -58,10 +59,10 @@ export default function Home() {
       <div className="fixed inset-0 -z-10 nebula-bg" />
       <div className="relative flex flex-col min-h-screen items-center justify-between p-4 sm:p-6 md:p-8 font-body text-foreground overflow-hidden">
         <header className="w-full max-w-7xl p-4 flex justify-between items-center bg-transparent">
-          <div className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3">
             <NeonJewelsLogo className="w-10 h-10" />
             <h1 className="text-2xl font-headline tracking-widest uppercase">Neon Jewels</h1>
-          </div>
+          </Link>
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="icon">
               <Share2 className="w-5 h-5" />
@@ -109,8 +110,8 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-4">
               <p>&copy; {new Date().getFullYear()} Neon Jewels. All Rights Reserved.</p>
               <div className="flex items-center gap-4">
-                <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
-                <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
+                <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
+                <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
                 <a href="https://github.com" target="_blank" rel="noopener noreferrer">
                   <Button variant="ghost" size="icon">
                     <Github className="w-5 h-5" />
