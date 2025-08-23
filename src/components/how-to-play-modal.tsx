@@ -22,7 +22,7 @@ export default function HowToPlayModal({ isOpen, onClose }: HowToPlayModalProps)
       <DialogContent className="max-w-lg w-full bg-card/80 backdrop-blur-xl border-primary shadow-2xl shadow-primary/20 text-foreground font-body">
         <DialogHeader>
           <DialogTitle className="font-headline text-2xl text-center flex items-center justify-center gap-2">
-            <HelpCircle className="text-primary w-6 h-6" /> How to Play Neon Jewels
+            <HelpCircle className="text-primary w-6 h-6" /> How to Play WordGlow
           </DialogTitle>
           <DialogDescription className="text-center">
             Your guide to mastering the glowing grid.

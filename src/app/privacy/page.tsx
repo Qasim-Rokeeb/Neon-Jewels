@@ -1,5 +1,5 @@
 
-import { NeonJewelsLogo } from '@/components/icons';
+import { WordGlowLogo } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Github, ShieldCheck, Info, FileText } from 'lucide-react';
@@ -12,8 +12,8 @@ export default function PrivacyPage() {
       <div className="relative flex flex-col min-h-screen items-center p-4 sm:p-6 md:p-8 font-body text-foreground overflow-hidden">
         <header className="w-full max-w-4xl p-4 flex justify-between items-center bg-transparent">
           <Link href="/" className="flex items-center gap-3">
-            <NeonJewelsLogo className="w-10 h-10" />
-            <h1 className="text-2xl font-headline tracking-widest uppercase">Neon Jewels</h1>
+            <WordGlowLogo className="w-10 h-10" />
+            <h1 className="text-2xl font-headline tracking-widest uppercase">WordGlow</h1>
           </Link>
         </header>
 
@@ -27,7 +27,7 @@ export default function PrivacyPage() {
 
             <div className="space-y-8 prose prose-invert max-w-none text-foreground/90">
               <p>
-                Your privacy is important to us. It is Neon Jewels' policy to respect your privacy regarding any information we may collect from you across our application. We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us.
+                Your privacy is important to us. It is WordGlow's policy to respect your privacy regarding any information we may collect from you across our application. We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us.
               </p>
 
               <section>
@@ -99,7 +99,7 @@ export default function PrivacyPage() {
         <footer className="w-full max-w-4xl text-center text-muted-foreground text-sm">
             <Separator className="my-4 bg-border/20" />
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-4">
-              <p>&copy; {new Date().getFullYear()} Neon Jewels. All Rights Reserved.</p>
+              <p>&copy; {new Date().getFullYear()} WordGlow. All Rights Reserved.</p>
               <div className="flex items-center gap-4">
                 <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
                 <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>

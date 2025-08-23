@@ -8,7 +8,7 @@ import EndGameModal from '@/components/end-game-modal';
 import HowToPlayModal from '@/components/how-to-play-modal';
 import { Button } from '@/components/ui/button';
 import { GameData, WordPlacement } from '@/lib/types';
-import { NeonJewelsLogo } from '@/components/icons';
+import { WordGlowLogo } from '@/components/icons';
 import { Award, HelpCircle, Share2, ChevronLeft, ChevronRight, Github } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
@@ -60,8 +60,8 @@ export default function Home() {
       <div className="relative flex flex-col min-h-screen items-center justify-between p-4 sm:p-6 md:p-8 font-body text-foreground overflow-hidden">
         <header className="w-full max-w-7xl p-4 flex justify-between items-center bg-transparent animate-fade-in-down">
           <Link href="/" className="flex items-center gap-3">
-            <NeonJewelsLogo className="w-10 h-10" />
-            <h1 className="text-2xl font-headline tracking-widest uppercase">Neon Jewels</h1>
+            <WordGlowLogo className="w-10 h-10" />
+            <h1 className="text-2xl font-headline tracking-widest uppercase">WordGlow</h1>
           </Link>
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="icon">
@@ -108,7 +108,7 @@ export default function Home() {
         <footer className="w-full max-w-7xl text-center text-muted-foreground text-sm animate-fade-in-up animation-delay-500">
             <Separator className="my-4 bg-border/20" />
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-4">
-              <p>&copy; {new Date().getFullYear()} Neon Jewels. All Rights Reserved.</p>
+              <p>&copy; {new Date().getFullYear()} WordGlow. All Rights Reserved.</p>
               <div className="flex items-center gap-4">
                 <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
                 <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>

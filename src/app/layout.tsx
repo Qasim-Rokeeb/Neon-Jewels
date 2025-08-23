@@ -5,8 +5,8 @@ import { cn } from '@/lib/utils';
 import { Righteous, Tektur } from "next/font/google";
 
 export const metadata: Metadata = {
-  title: 'Neon Jewels',
-  description: 'Where words mint beauty & assets',
+  title: 'WordGlow',
+  description: 'Weave words of light in this futuristic word game.',
 };
 
 const fontHeadline = Righteous({

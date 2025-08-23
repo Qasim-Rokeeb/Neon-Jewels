@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-export function NeonJewelsLogo({ className }: { className?: string }) {
+export function WordGlowLogo({ className }: { className?: string }) {
   return (
     <div className={cn("relative", className)}>
       <svg
@@ -37,7 +37,7 @@ export function NeonJewelsLogo({ className }: { className?: string }) {
           textAnchor="middle"
           dominantBaseline="middle"
         >
-          NJ
+          WG
         </text>
       </svg>
     </div>
