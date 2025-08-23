@@ -1,3 +1,4 @@
+
 import { cn } from '@/lib/utils';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Crown, User, Bot } from 'lucide-react';
@@ -22,7 +23,7 @@ export default function PlayerInfo({ playerName, score, isCurrentPlayer, isWinne
       )}
     >
       <div className={cn(
-          "absolute inset-x-0 top-0 h-1.5",
+          "absolute inset-x-0 top-0 h-1.5 transition-all duration-500",
           isWinner ? "bg-amber-400" : (isCurrentPlayer ? "bg-primary" : "bg-transparent"),
           isWinner && "shadow-[0_0_10px_theme(colors.amber.400)]",
           isCurrentPlayer && "shadow-[0_0_10px_hsl(var(--primary))]"
@@ -36,7 +37,7 @@ export default function PlayerInfo({ playerName, score, isCurrentPlayer, isWinne
           </div>
           <h2 className="font-headline text-xl tracking-wider">{playerName}</h2>
         </div>
-        {isWinner && <Crown className="w-7 h-7 text-amber-400" />}
+        {isWinner && <Crown className="w-7 h-7 text-amber-400 animate-pulse" />}
       </div>
 
       <div className="mt-4 flex justify-end">

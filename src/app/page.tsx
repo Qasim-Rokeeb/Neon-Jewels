@@ -1,14 +1,15 @@
+
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import GameBoard from '@/components/game-board';
 import PlayerInfo from '@/components/player-info';
 import EndGameModal from '@/components/end-game-modal';
 import HowToPlayModal from '@/components/how-to-play-modal';
 import { Button } from '@/components/ui/button';
-import { GameData } from '@/lib/types';
+import { GameData, WordPlacement } from '@/lib/types';
 import { NeonJewelsLogo } from '@/components/icons';
-import { Award, HelpCircle, Share2 } from 'lucide-react';
+import { Award, HelpCircle, Share2, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const MOCK_GAME_DATA: GameData = {
   boardSize: 15,
@@ -28,6 +29,28 @@ const MOCK_GAME_DATA: GameData = {
 export default function Home() {
   const [isEndGameModalOpen, setIsEndGameModalOpen] = useState(false);
   const [isHowToPlayModalOpen, setIsHowToPlayModalOpen] = useState(false);
+  const [currentMove, setCurrentMove] = useState(0);
+
+  const visiblePlacements = useMemo(() => MOCK_GAME_DATA.placements.slice(0, currentMove), [currentMove]);
+
+  const currentScores = useMemo(() => {
+    const scores = { "NeonGamer": 0, "AI Opponent": 0 };
+    for (let i = 0; i < currentMove; i++) {
+      const placement = MOCK_GAME_DATA.placements[i];
+      scores[placement.player as keyof typeof scores] += placement.score;
+    }
+    return scores;
+  }, [currentMove]);
+
+  const handleNext = () => {
+    setCurrentMove(prev => Math.min(prev + 1, MOCK_GAME_DATA.placements.length));
+  };
+
+  const handlePrev = () => {
+    setCurrentMove(prev => Math.max(prev - 1, 0));
+  };
+  
+  const isGameFinished = currentMove === MOCK_GAME_DATA.placements.length;
 
   return (
     <>
@@ -50,31 +73,41 @@ export default function Home() {
 
         <main className="flex flex-col xl:flex-row items-center justify-center gap-8 w-full max-w-7xl my-8">
           <div className="w-full xl:w-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-8 order-2 xl:order-1">
-            <PlayerInfo playerName="NeonGamer" score={MOCK_GAME_DATA.finalScores["NeonGamer"]} isCurrentPlayer={false} />
-            <PlayerInfo playerName="AI Opponent" score={MOCK_GAME_DATA.finalScores["AI Opponent"]} isCurrentPlayer={false} isWinner={true} />
+            <PlayerInfo playerName="NeonGamer" score={currentScores["NeonGamer"]} isCurrentPlayer={false} />
+            <PlayerInfo playerName="AI Opponent" score={currentScores["AI Opponent"]} isCurrentPlayer={false} isWinner={isGameFinished && MOCK_GAME_DATA.finalScores["AI Opponent"] > MOCK_GAME_DATA.finalScores["NeonGamer"]} />
           </div>
           
-          <div className="flex-shrink-0 order-1 xl:order-2">
-            <GameBoard placements={MOCK_GAME_DATA.placements} boardSize={MOCK_GAME_DATA.boardSize} />
+          <div className="flex flex-col items-center gap-4 order-1 xl:order-2">
+            <GameBoard placements={visiblePlacements} boardSize={MOCK_GAME_DATA.boardSize} />
+            <div className="flex items-center gap-4 mt-2">
+              <Button onClick={handlePrev} disabled={currentMove === 0} variant="outline" size="icon">
+                <ChevronLeft />
+              </Button>
+              <p className="text-sm text-muted-foreground w-24 text-center">Move: {currentMove} / {MOCK_GAME_DATA.placements.length}</p>
+              <Button onClick={handleNext} disabled={isGameFinished} variant="outline" size="icon">
+                <ChevronRight />
+              </Button>
+            </div>
           </div>
         </main>
         
         <footer className="w-full flex justify-center pb-4">
             <Button
               onClick={() => setIsEndGameModalOpen(true)}
+              disabled={!isGameFinished}
               size="lg"
-              className="font-headline text-lg tracking-wider bg-primary/80 backdrop-blur-sm border border-primary hover:bg-primary transition-all duration-300 ease-in-out shadow-[0_0_20px_hsl(var(--primary)/0.5),inset_0_0_10px_hsl(var(--primary)/0.3)] hover:shadow-[0_0_40px_hsl(var(--primary)/0.8)] hover:scale-105 animate-pulse-slow"
+              className="font-headline text-lg tracking-wider bg-primary/80 backdrop-blur-sm border border-primary hover:bg-primary transition-all duration-300 ease-in-out shadow-[0_0_20px_hsl(var(--primary)/0.5),inset_0_0_10px_hsl(var(--primary)/0.3)] hover:shadow-[0_0_40px_hsl(var(--primary)/0.8)] hover:scale-105 data-[disabled]:animate-none data-[disabled]:shadow-none data-[disabled]:scale-100 data-[disabled]:bg-muted/50 data-[disabled]:text-muted-foreground animate-pulse-slow"
             >
               <Award className="mr-2 h-5 w-5" />
               Show Play of the Game
             </Button>
         </footer>
 
-        <EndGameModal
+        {isGameFinished && <EndGameModal
           isOpen={isEndGameModalOpen}
           onClose={() => setIsEndGameModalOpen(false)}
           gameData={MOCK_GAME_DATA}
-        />
+        />}
         <HowToPlayModal
           isOpen={isHowToPlayModalOpen}
           onClose={() => setIsHowToPlayModalOpen(false)}
