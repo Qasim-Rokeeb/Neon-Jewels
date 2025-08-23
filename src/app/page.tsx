@@ -9,7 +9,8 @@ import HowToPlayModal from '@/components/how-to-play-modal';
 import { Button } from '@/components/ui/button';
 import { GameData, WordPlacement } from '@/lib/types';
 import { NeonJewelsLogo } from '@/components/icons';
-import { Award, HelpCircle, Share2, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Award, HelpCircle, Share2, ChevronLeft, ChevronRight, Github } from 'lucide-react';
+import { Separator } from '@/components/ui/separator';
 
 const MOCK_GAME_DATA: GameData = {
   boardSize: 15,
@@ -71,7 +72,7 @@ export default function Home() {
           </div>
         </header>
 
-        <main className="flex flex-col xl:flex-row items-center justify-center gap-8 w-full max-w-7xl my-8">
+        <main className="flex flex-1 flex-col xl:flex-row items-center justify-center gap-8 w-full max-w-7xl my-8">
           <div className="w-full xl:w-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-8 order-2 xl:order-1">
             <PlayerInfo playerName="NeonGamer" score={currentScores["NeonGamer"]} isCurrentPlayer={false} />
             <PlayerInfo playerName="AI Opponent" score={currentScores["AI Opponent"]} isCurrentPlayer={false} isWinner={isGameFinished && MOCK_GAME_DATA.finalScores["AI Opponent"] > MOCK_GAME_DATA.finalScores["NeonGamer"]} />
@@ -91,7 +92,7 @@ export default function Home() {
           </div>
         </main>
         
-        <footer className="w-full flex justify-center pb-4">
+        <div className="w-full flex justify-center py-8">
             <Button
               onClick={() => setIsEndGameModalOpen(true)}
               disabled={!isGameFinished}
@@ -101,6 +102,22 @@ export default function Home() {
               <Award className="mr-2 h-5 w-5" />
               Show Play of the Game
             </Button>
+        </div>
+
+        <footer className="w-full max-w-7xl text-center text-muted-foreground text-sm">
+            <Separator className="my-4 bg-border/20" />
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-4">
+              <p>&copy; {new Date().getFullYear()} Neon Jewels. All Rights Reserved.</p>
+              <div className="flex items-center gap-4">
+                <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
+                <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+                  <Button variant="ghost" size="icon">
+                    <Github className="w-5 h-5" />
+                  </Button>
+                </a>
+              </div>
+            </div>
         </footer>
 
         {isGameFinished && <EndGameModal
