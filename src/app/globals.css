@@ -2,26 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.nebula-bg {
-  background: radial-gradient(ellipse at 70% 30%, hsl(var(--primary) / 0.15), transparent 50%),
-    radial-gradient(ellipse at 30% 80%, hsl(var(--accent) / 0.15), transparent 50%),
-    radial-gradient(ellipse at 50% 50%, hsl(var(--destructive) / 0.1), transparent 60%);
-  animation: nebula-flow 60s ease-in-out infinite;
-  background-size: 200% 200%;
-}
-
-@keyframes nebula-flow {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 @layer base {
   :root {
     --background: 240 10% 3.9%;
@@ -67,13 +47,33 @@
     --input: 228 9% 11%;
     --ring: 253 83% 67%;
   }
-}
-
-@layer base {
+  
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .nebula-bg {
+    background: radial-gradient(ellipse at 70% 30%, hsl(var(--primary) / 0.15), transparent 50%),
+      radial-gradient(ellipse at 30% 80%, hsl(var(--accent) / 0.15), transparent 50%),
+      radial-gradient(ellipse at 50% 50%, hsl(var(--destructive) / 0.1), transparent 60%);
+    animation: nebula-flow 60s ease-in-out infinite;
+    background-size: 200% 200%;
+  }
+
+  @keyframes nebula-flow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
 }
