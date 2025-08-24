@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import { Orbitron, Inter } from "next/font/google";
 
 export const metadata: Metadata = {
-  title: 'WordGlow',
+  title: 'Neon Jewels',
   description: 'Weave words of light in this futuristic word game.',
 };
 
@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={cn("font-body antialiased", fontBody.variable, fontHeadline.variable, "min-h-screen bg-background")}>
+      <body className={cn("min-h-screen font-body antialiased", fontBody.variable, fontHeadline.variable)}>
         {children}
         <Toaster />
       </body>

@@ -4,42 +4,52 @@
 
 @layer base {
   :root {
-    --background: 240 10% 3.9%;
+    --background: 228 9% 6%; /* #0A0A0F - Void */
     --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
+
+    --card: 228 9% 9%;
     --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
+
+    --popover: 228 9% 6%;
     --popover-foreground: 0 0% 98%;
-    --primary: 253 83% 67%;
+
+    --primary: 253 83% 67%; /* #7B68EE - Amethyst */
     --primary-foreground: 253 83% 98%;
-    --secondary: 240 3.7% 15.9%;
+
+    --secondary: 228 9% 12%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 172 100% 50%;
+
+    --muted: 228 9% 12%;
+    --muted-foreground: 228 9% 60%;
+
+    --accent: 172 100% 50%; /* #00FFD1 - Aqua */
     --accent-foreground: 172 100% 10%;
-    --destructive: 0 62.8% 30.6%;
+
+    --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
+
+    --border: 228 9% 15%;
+    --input: 228 9% 11%;
     --ring: 253 83% 67%;
+
     --radius: 0.75rem;
   }
 
   .dark {
-    --background: 228 9% 6%; /* #0A0A0F - Void */
+    /* Keeping dark variables same as root for a consistent dark theme */
+    --background: 228 9% 6%;
     --foreground: 0 0% 98%;
     --card: 228 9% 9%;
     --card-foreground: 0 0% 98%;
     --popover: 228 9% 6%;
     --popover-foreground: 0 0% 98%;
-    --primary: 253 83% 67%; /* #7B68EE - Amethyst */
+    --primary: 253 83% 67%;
     --primary-foreground: 253 83% 98%;
     --secondary: 228 9% 12%;
     --secondary-foreground: 0 0% 98%;
     --muted: 228 9% 12%;
     --muted-foreground: 228 9% 60%;
-    --accent: 172 100% 50%; /* #00FFD1 - Aqua */
+    --accent: 172 100% 50%;
     --accent-foreground: 172 100% 10%;
     --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 98%;
@@ -47,11 +57,11 @@
     --input: 228 9% 11%;
     --ring: 253 83% 67%;
   }
-  
+
   * {
     border-color: hsl(var(--border));
   }
-  
+
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));

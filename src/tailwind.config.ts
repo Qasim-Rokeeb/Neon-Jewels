@@ -1,12 +1,13 @@
 import type {Config} from 'tailwindcss';
 
-export default {
+const config = {
   darkMode: ['class'],
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  prefix: "",
   theme: {
     container: {
       center: true,
@@ -21,16 +22,11 @@ export default {
         headline: ['var(--font-headline)', 'sans-serif'],
       },
       colors: {
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
-        },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
-        },
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
@@ -38,6 +34,10 @@ export default {
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))',
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
         },
         muted: {
           DEFAULT: 'hsl(var(--muted))',
@@ -47,13 +47,14 @@ export default {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
         },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
         },
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -120,9 +121,8 @@ export default {
       }
     },
   },
-  plugins: [
-      require('tailwindcss-animate'),
-      function({ addUtilities, theme }: { addUtilities: any, theme: any }) {
+  plugins: [require('tailwindcss-animate'),
+    function({ addUtilities, theme }: { addUtilities: any, theme: any }) {
         const newUtilities = {
           '.animation-delay-100': {
             'animation-delay': theme('animationDelay.100'),
@@ -143,4 +143,6 @@ export default {
         addUtilities(newUtilities, ['responsive', 'hover'])
       }
   ],
-} satisfies Config;
+} satisfies Config
+
+export default config;
