@@ -23,7 +23,7 @@ export default function PlayerInfo({ playerName, score, isCurrentPlayer, isWinne
       )}
     >
       <div className={cn(
-          "absolute inset-x-0 top-0 h-1 sm:h-1.5 transition-all duration-500",
+          "absolute inset-x-0 top-0 h-1 sm:h-1.5 transition-all duration-500 ease-elegant",
           isWinner ? "bg-amber-400" : (isCurrentPlayer ? "bg-primary" : "bg-transparent"),
           isWinner && "shadow-[0_0_10px_theme(colors.amber.400)]",
           isCurrentPlayer && "shadow-[0_0_10px_hsl(var(--primary))]"

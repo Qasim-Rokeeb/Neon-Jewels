@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { User, Bot, Loader } from 'lucide-react';
+import { User, Bot, Loader, CheckCircle } from 'lucide-react';
 
 interface TurnIndicatorProps {
   turn: 'human' | 'ai';
@@ -12,6 +12,7 @@ export default function TurnIndicator({ turn, isAiThinking, isFinished }: TurnIn
   if (isFinished) {
     return (
        <div className="flex items-center justify-center gap-3 p-3 rounded-lg bg-card/50 border border-border">
+          <CheckCircle className="w-6 h-6 text-green-400"/>
           <span className="font-headline text-lg">Game Over</span>
        </div>
     )
@@ -21,7 +22,7 @@ export default function TurnIndicator({ turn, isAiThinking, isFinished }: TurnIn
 
   return (
     <div className={cn(
-        "flex items-center justify-center gap-3 p-3 rounded-lg bg-card/50 border transition-all",
+        "flex items-center justify-center gap-3 p-3 rounded-lg bg-card/50 border transition-all duration-300 ease-elegant",
         isPlayerTurn ? "border-primary" : "border-accent",
         isAiThinking && "animate-pulse"
     )}>

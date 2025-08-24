@@ -2,20 +2,19 @@ import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
-import { Righteous, Tektur } from "next/font/google";
+import { Orbitron, Inter } from "next/font/google";
 
 export const metadata: Metadata = {
   title: 'WordGlow',
   description: 'Weave words of light in this futuristic word game.',
 };
 
-const fontHeadline = Righteous({
+const fontHeadline = Orbitron({
   subsets: ["latin"],
-  weight: "400",
   variable: "--font-headline",
 });
 
-const fontBody = Tektur({
+const fontBody = Inter({
   subsets: ["latin"],
   variable: "--font-body",
 });

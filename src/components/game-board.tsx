@@ -3,8 +3,7 @@ import Tile from './tile';
 import { cn } from '@/lib/utils';
 
 interface GameBoardProps {
-  placements: WordPlacement[];
-  boardSize: number;
+  board: BoardSquare[][];
 }
 
 const MULTIPLIERS: { [key: string]: { label: string; className: string } } = {
@@ -28,33 +27,14 @@ const MULTIPLIERS: { [key: string]: { label: string; className: string } } = {
 };
 
 
-export default function GameBoard({ placements, boardSize }: GameBoardProps) {
-  const board: BoardSquare[][] = Array(boardSize).fill(null).map(() => Array(boardSize).fill(null));
-
-  placements.forEach(word => {
-    let { x, y } = word.position;
-    const playerNum = word.player === 'NeonGamer' ? 1 : 2;
-    for (let i = 0; i < word.word.length; i++) {
-      const letter = word.word[i];
-      if (y >= 0 && y < boardSize && x >= 0 && x < boardSize) {
-        if (!board[y][x]) { // Don't overwrite existing letters
-           board[y][x] = { letter, player: playerNum };
-        }
-      }
-      if (word.direction === 'horizontal') {
-        x++;
-      } else {
-        y++;
-      }
-    }
-  });
+export default function GameBoard({ board }: GameBoardProps) {
 
   return (
     <div className="p-2 md:p-4 bg-card/50 backdrop-blur-md rounded-xl border border-border shadow-2xl shadow-primary/10">
       <div
         className="grid"
         style={{
-          gridTemplateColumns: `repeat(${boardSize}, minmax(0, 1fr))`,
+          gridTemplateColumns: `repeat(${board.length}, minmax(0, 1fr))`,
           gap: '2px',
         }}
       >

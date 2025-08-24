@@ -384,7 +384,7 @@ export default function GamePage() {
     if (gameState?.isFinished && !isEndGameModalOpen) {
       handleShowPlayOfTheGame();
     }
-  }, [gameState?.isFinished]);
+  }, [gameState?.isFinished, isEndGameModalOpen, handleShowPlayOfTheGame]);
 
   const handleShowPlayOfTheGame = useCallback(async () => {
     if(!gameState) return;
@@ -437,7 +437,7 @@ export default function GamePage() {
         <div className="flex-1 grid grid-cols-1 md:grid-cols-[1fr_320px] lg:grid-cols-[1fr_380px] xl:grid-cols-[1fr_420px] gap-4 container mx-auto p-4">
           <main className="flex flex-col items-center justify-center gap-4 animate-fade-in animation-delay-200 order-2 md:order-1">
             <div className="w-full max-w-full aspect-square sm:max-w-[calc(100vh-200px)]">
-              <GameBoard placements={gameState.placements.map(p => ({...p, player: p.player === 'You' ? 'NeonGamer' : 'AI Opponent'}))} boardSize={BOARD_SIZE} />
+              <GameBoard board={gameState.board} />
             </div>
           </main>
           
@@ -538,4 +538,3 @@ export default function GamePage() {
     </>
   );
 }
-
